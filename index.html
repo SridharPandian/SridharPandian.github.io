@@ -1,0 +1,152 @@
+<html>
+  <head>
+
+            <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <style>
+        @import 'https://fonts.googleapis.com/css?family=Roboto+Mono:100';
+        html,
+        body {
+          font-family: 'Roboto Mono', monospace;
+          background: #212121;
+        }
+        .text {
+          font-weight: 100;
+          font-size: 28px;
+          color: rgb(81, 255, 0);
+        }
+        .dud {
+          color: #33ff00;
+        }
+        .name{
+          font-size: 50px;
+          color: #00ff0d;
+        }
+        .main{
+          margin-top: 250px;
+          text-align: center;
+        }
+        .but{
+          border-radius: 50%;
+          background-color: transparent;
+          padding: 20px 22px;
+          color: #09ff00;
+          border-color:  #2bff00;
+          border-width: 1px;
+          display: inline-block;
+          text-decoration: none;
+          cursor: pointer;
+          transition-duration: 0.2s;
+        }
+        .but:hover{
+          padding: 25px 27px;
+          opacity: 90%;
+          color: #212121;
+          background-color: rgb(51, 255, 0);
+        }
+        .inbut{
+          display: inline-block;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+        <p class="name">Sridhar Pandian</p>
+        <div class="text"></div>
+        <br>
+        <div>
+          <div class="inbut"><a href="https://github.com/SridharPandian"><button class="but"><i class="fa fa-github"></i></button></a></div>
+          <div class="inbut"> <a href="https://sripan172@gmail.com"><button class="but"><i class="fa fa-envelope"></i></button></a></div>
+          <div class="inbut"><a href="https://www.linkedin.com/in/sridhar-pandian-20aa13137/"><button class="but"><i class="fa fa-linkedin"></i></button></a></div>
+          <div class="inbut"><a href="https://github.com/SridharPandian"><button class="but"><i class="fa fa-facebook"></i></button></a></div>
+        </div>
+    </div>
+    <script> 
+      class TextScramble {
+        constructor(el) {
+          this.el = el;
+          this.chars = "!<>-_\\/[]{}—=+*^?#________";
+          this.update = this.update.bind(this);
+        }
+        setText(newText) {
+          const oldText = this.el.innerText;
+          const length = Math.max(oldText.length, newText.length);
+          const promise = new Promise(resolve => (this.resolve = resolve));
+          this.queue = [];
+          for (let i = 0; i < length; i++) {
+            const from = oldText[i] || "";
+            const to = newText[i] || "";
+            const start = Math.floor(Math.random() * 40);
+            const end = start + Math.floor(Math.random() * 40);
+            this.queue.push({ from, to, start, end });
+          }
+          cancelAnimationFrame(this.frameRequest);
+          this.frame = 0;
+          this.update();
+          return promise;
+        }
+        update() {
+          let output = "";
+          let complete = 0;
+          for (let i = 0, n = this.queue.length; i < n; i++) {
+            let { from, to, start, end, char } = this.queue[i];
+            if (this.frame >= end) {
+              complete++;
+              output += to;
+            } else if (this.frame >= start) {
+              if (!char || Math.random() < 0.28) {
+                char = this.randomChar();
+                this.queue[i].char = char;
+              }
+              output += `<span class="dud">${char}</span>`;
+            } else {
+              output += from;
+            }
+          }
+          this.el.innerHTML = output;
+          if (complete === this.queue.length) {
+            this.resolve();
+          } else {
+            this.frameRequest = requestAnimationFrame(this.update);
+            this.frame++;
+          }
+        }
+        randomChar() {
+          return this.chars[Math.floor(Math.random() * this.chars.length)];
+        }
+      }
+      const phrases = [
+        "Full stack developer",
+        "ML learner",
+        "Open source contributer",
+        "ECE Undergrad",
+      ];
+      
+      const el = document.querySelector(".text");
+      const fx = new TextScramble(el);
+      
+      let counter = 0;
+      const next = () => {
+        fx.setText(phrases[counter]).then(() => {
+          setTimeout(next, 800);
+        });
+        counter = (counter + 1) % phrases.length;
+      };
+      
+      next();
+    </script>
+  </body>
+</html>
