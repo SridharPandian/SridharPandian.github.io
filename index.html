@@ -97,6 +97,7 @@
             var star, xPos, yPos;
             var longpres = 600;
             var cli = 200;
+            $("span").disableSelection();
             $("span").on('touchmove', function(e) {
             }).on('touchend', function (e) {
                 var fxPos = e.changedTouches[0].pageX;
