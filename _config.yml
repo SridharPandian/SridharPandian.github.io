@@ -1,10 +1,13 @@
 layout: sidebar
-style: light
+style: dark
+encoding: UTF-8
 
 plugins:
   - jekyll-octicons
   - jekyll-github-metadata
   - jemoji
+  - jekyll-sitemap
+  - jekyll-feed
 
 permalink: /:year/:month/:day/:title/
 
@@ -16,43 +19,55 @@ defaults:
     values:
       layout: "post"
 
+categories:
+  research:
+    - research/_posts/vinn.md
+
 projects:
   sort_by: pushed
   # sort_by options:
   #   - pushed
   #   - stars
-  limit: 9
+  limit: 15
   exclude:
     archived: false
     forks: true
     projects:
-    # - repo-name
+    - SridharPandian.github.io
+    - Deep-Learning-Competition-Spring-2022
+    - Service-Us
+    - Decentralized-Voting-Application
+    - Custom-Linux-Drivers
+    - Note-Creator
 
 social_media:
   # behance: your_username
   # dribbble: your_username
-  # facebook: your_username
+  facebook: sripan172
+  twitter: pandian_sridhar
   # hackerrank: your_username
   # instagram: your_username
   # keybase: your_username
-  # linkedin: sridhar_pandian
+  linkedin: sridhar-pandian
+  scholar: w8ceznMAAAAJ
   # mastodon: your_username
   # medium: your_username
   # stackoverflow: your_user_id
   # telegram: your_username
-  # twitter: pandian_sridhar
   # unsplash: your_username
   # vk: your_username
-  # website: http://your_website_url
+  website: http://sridharpandian.github.io
   # youtube: your_username
 
 topics:
-  - name: CSS
-    web_url: https://github.com/topics/css
-    image_url: https://raw.githubusercontent.com/github/explore/6c6508f34230f0ac0d49e847a326429eefbfc030/topics/css/css.png
+  - name: Robotics
+    web_url: https://github.com/topics/robotics
+    image_url: assets/robot.png
+  
+  - name: Deep Learning
+    web_url: https://github.com/topics/deep-learning
+    image_url: assets/ai.png
 
-  - name: Web design
-
-  - name: Sass
-    web_url: https://github.com/topics/sass
-    image_url: https://raw.githubusercontent.com/github/explore/6c6508f34230f0ac0d49e847a326429eefbfc030/topics/sass/sass.png
+  - name: Computer Vision
+    web_url: https://github.com/topics/deep-learning
+    image_url: assets/cv.png
